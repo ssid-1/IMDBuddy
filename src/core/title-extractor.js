@@ -1,6 +1,6 @@
 /**
  * IMDBuddy - Title Extractor Module
- * 
+ *
  * Platform-agnostic title extraction with debugging capabilities.
  * Handles the extraction of movie/show titles from DOM elements
  * based on platform-specific configurations.
@@ -14,18 +14,18 @@ const TitleExtractor = {
      * @returns {Object|null} Title data object or null if extraction failed
      */
     extract(element, platformConfig) {
-        LOGGER.group('TitleExtractor:#extract: ', element);
         try {
             const result = platformConfig.extractTitle(element, platformConfig.titleSelectors);
-            if (result) {
-                LOGGER.debug('TitleExtractor: Successfully extracted:', result);
-            } else {
-                LOGGER.warn('TitleExtractor: Extraction failed for element');
-                this.logExtractionFailure(element, platformConfig, window.location.hostname);
+            if (!result) {
+                // Only log failures if verbose, otherwise it's too noisy for every non-title element
+                if (BASE_CONFIG.VERBOSE) {
+                    this.logExtractionFailure(element, platformConfig, window.location.hostname);
+                }
             }
             return result;
-        } finally {
-            LOGGER.groupEnd();
+        } catch (e) {
+            LOGGER.error('Title extraction error:', e);
+            return null;
         }
     },
 
@@ -44,7 +44,7 @@ const TitleExtractor = {
             this.logHotstarDebugInfo(element);
         } else if (hostname.includes('netflix.com')) {
             this.logNetflixDebugInfo(element);
-        }      
+        }
     },
 
     /**
