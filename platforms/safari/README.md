@@ -9,7 +9,7 @@ This directory contains the Safari Web Extension version of IMDBuddy. Safari ext
 ### Build First
 Before opening the Xcode project, always run:
 ```bash
-./build-universal.sh
+./scripts/build.sh
 ```
 
 This generates the latest modular extension files in `dist/safari-extension/` which are automatically linked to the Xcode project.
@@ -17,7 +17,7 @@ This generates the latest modular extension files in `dist/safari-extension/` wh
 ## Directory Structure
 
 ```
-Safari-App/
+platforms/safari/
 └── IMDBuddy-Safari/
     ├── IMDBuddy-Safari/                    # Native macOS app
     │   ├── AppDelegate.swift               # App delegate

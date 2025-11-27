@@ -111,20 +111,20 @@ const PLATFORM_CONFIGS = {
         name: 'Netflix',
         hostnames: ['netflix.com'],
         cardSelectors: [
-            '.slider-item',
-            '.title-card',
-            '.fallback-text-container',
-            'a[aria-label]'
+            '.slider-item', 
+            '.title-card', 
+            '.gallery-item', 
+            '.title-card-container'
         ],
         titleSelectors: [
-            'a[aria-label]',
-            '.fallback-text',
-            '.video-title'
+            'a[aria-label]', 
+            '.fallback-text', 
+            '[aria-label]'
         ],
         imageContainerSelectors: [
-            '.boxart-image-in-padded-container',
-            '.fallback-text-container',
-            '.title-card-image-fallback'
+            '.boxart-container', 
+            '.title-card-container',
+            '.previewModal--boxart'
         ],
         extractTitle: (element, selectors) => {
             // First try aria-label on links (most reliable for Netflix)
@@ -168,12 +168,16 @@ const PLATFORM_CONFIGS = {
         name: 'Prime Video',
         hostnames: ['primevideo.com', 'amazon.com'],
         cardSelectors: [
+            '[data-testid="card-container-list"]',
             '.tst-hover-container', 
             '.av-card-container'
         ],
         titleSelectors: [
             '[data-automation-id="title"]', 
-            '.av-card-title'
+            '[data-testid="packshot"]',
+            '.av-card-title',
+            '.data-card-title'
+
         ],
         imageContainerSelectors: [
             '.av-card-image', 

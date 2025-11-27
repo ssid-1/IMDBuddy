@@ -8,7 +8,7 @@ IMDBuddy has been refactored into a modular, maintainable architecture that maxi
 
 ```
 IMDBuddy/
-├── shared/                          # 🆕 Shared code for all platforms
+├── src/                             # 🆕 Core extension source code
 │   ├── core/                        # Core extension modules
 │   │   ├── config.js               # Base configuration
 │   │   ├── platform-detector.js    # Platform detection
@@ -26,11 +26,14 @@ IMDBuddy/
 │   ├── assets/                     # Shared assets
 │   │   └── images/                 # Icons and images
 │   └── content.js                  # 🆕 Unified content script
-├── chrome-extension/               # Chrome-specific files (built)
-├── safari-extension/               # Safari-specific files (built)
-├── Safari-App/                     # Safari Xcode project
-├── build-universal.sh              # 🆕 Universal build script
-├── build-safari.sh                 # Updated Safari build script
+├── platforms/                       # Platform-specific wrappers
+│   └── safari/                      # Safari Xcode project
+├── scripts/                         # Build and utility scripts
+│   ├── build.sh                     # Universal build script
+│   └── generate-manifests.sh        # Manifest generator
+├── dist/                            # Generated build artifacts
+│   ├── chrome-extension/
+│   └── safari-extension/
 ├── shared-config.json              # Shared manifest configuration
 └── HOW-TO-ADD-STREAMING-SERVICE.md # 🆕 Comprehensive guide
 ```
@@ -73,9 +76,9 @@ IMDBuddy/
 
 ## 📦 Build System
 
-### Universal Build Script (`build-universal.sh`)
+### Universal Build Script (`scripts/build.sh`)
 ```bash
-./build-universal.sh
+./scripts/build.sh
 ```
 - Builds **both Chrome and Safari** extensions
 - Uses **shared source code** for maximum consistency
@@ -86,7 +89,7 @@ IMDBuddy/
 
 The modular architecture makes adding new platforms incredibly simple:
 
-1. **Add platform configuration** to `shared/platform-configs/platforms.js`
+1. **Add platform configuration** to `src/platform-configs/platforms.js`
 2. **Update permissions** in `shared-config.json`
 3. **Run build script** to generate extensions
 4. **Test and deploy**

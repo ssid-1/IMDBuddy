@@ -12,8 +12,8 @@
       "https://*.disneyplus.com/*",
       "https://*.netflix.com/*",
       "https://*.primevideo.com/*",
-      "https://api.imdbapi.dev/*",
-      "https://amazon.com/gp/video/*"
+      "https://*.amazon.com/*",
+      "https://api.imdbapi.dev/*"
     ]
   },
   "content_scripts": [
@@ -23,7 +23,7 @@
         "https://*.disneyplus.com/*",
         "https://*.netflix.com/*",
         "https://*.primevideo.com/*",
-        "https://amazon.com/gp/video/*"
+        "https://*.amazon.com/*"
       ],
       "js": [
         "core/config.js",

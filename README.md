@@ -2,7 +2,7 @@
 
 A smart, modular browser extension that displays **instant IMDB ratings** while browsing Netflix, Hotstar, Prime Video, and other streaming platforms. Never wonder "Is this worth watching?" again!
 
-![Demo Image of IMDBuddy](./shared/assets/images/demo.png)
+![Demo Image of IMDBuddy](./src/assets/images/demo.png)
 
 **Supported Platforms**: Hotstar • Netflix • Prime Video • Disney+ ✨
 
@@ -11,7 +11,7 @@ A smart, modular browser extension that displays **instant IMDB ratings** while 
 ## ✨ Features
 
 - **� Smart Matching**: Advanced fuzzy matching finds ratings even with title variations
-- **⚡ Instant Results**: Cached results for lightning-fast performance  
+- **⚡ Instant Results**: Cached results for lightning-fast performance
 - **🎨 Beautiful Overlays**: Non-intrusive rating displays that blend seamlessly
 - **🌐 Multi-Platform**: Works across Netflix, Hotstar, Disney+, Prime Video
 - **🔄 Auto-Updates**: Dynamically loads ratings as you browse
@@ -20,15 +20,15 @@ A smart, modular browser extension that displays **instant IMDB ratings** while 
 ## 🚀 Quick Installation
 
 ### Chrome Extension
-1. **Build from source**: Run `./build-universal.sh`
+1. **Build from source**: Run `./scripts/build.sh`
 2. **Open Chrome** and go to `chrome://extensions/`
 3. **Enable "Developer mode"** (toggle in top right)
 4. **Click "Load unpacked"** and select the `dist/chrome-extension/` directory
 5. **Visit any supported streaming platform** and see IMDB ratings appear!
 
 ### Safari Extension
-1. **Build for Safari**: Run `./build-universal.sh`
-2. **Follow the detailed setup guide** in `Safari-App/README.md`
+1. **Build for Safari**: Run `./scripts/build.sh`
+2. **Follow the detailed setup guide** in `platforms/safari/README.md`
 3. **Open Safari** and enable the extension in preferences
 
 ## 🏗️ New Modular Architecture
@@ -127,7 +127,7 @@ A Safari Web Extension version is available in the `Safari-App/` directory. This
 
 ### Quick Setup for Safari:
 1. Run `./build-safari.sh` to generate Safari-compatible files
-2. Use the generated files in an Xcode Safari Web Extension project  
+2. Use the generated files in an Xcode Safari Web Extension project
 3. See `Safari-App/README.md` for detailed build instructions
 
 The Safari extension maintains full compatibility with the Chrome version while providing native macOS integration.

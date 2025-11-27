@@ -63,7 +63,7 @@ jq '{
 
 echo "✅ Manifests generated successfully!"
 echo "   - Chrome: dist/chrome-extension/manifest.json"
-echo "   - Safari: build-tools/safari-manifest.json"
+echo "   - Safari: dist/safari-extension/manifest.json"
 echo ""
 echo "🔍 Differences between generated manifests:"
 echo "   - Chrome uses Manifest V3, Safari uses V2"

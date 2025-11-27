@@ -18,7 +18,7 @@ NC='\033[0m' # No Color
 # Build directories
 CHROME_DIR="dist/chrome-extension"
 SAFARI_DIR="dist/safari-extension"
-SHARED_DIR="shared"
+SHARED_DIR="src"
 
 # Function to print colored output
 print_status() {
@@ -48,7 +48,7 @@ mkdir -p "$SAFARI_DIR"
 
 # Generate manifests if they don't exist or if shared config is newer
 print_status "Generating manifests from shared configuration..."
-if ! ./build-tools/generate-manifests.sh; then
+if ! ./scripts/generate-manifests.sh; then
     print_error "Failed to generate manifests"
     exit 1
 fi
@@ -97,7 +97,7 @@ cp "$SHARED_DIR/ui/popup.js" "$SAFARI_DIR/"
 cp -r "$SHARED_DIR/assets/images" "$SAFARI_DIR/"
 
 # Copy Safari-specific files
-cp "build-tools/safari-compatibility.js" "$SAFARI_DIR/"
+cp "scripts/safari-compatibility.js" "$SAFARI_DIR/"
 
 # Verify Safari manifest was generated
 if [ -f "$SAFARI_DIR/manifest.json" ]; then
@@ -110,22 +110,22 @@ print_success "Safari extension built in $SAFARI_DIR/"
 
 # Update Safari Xcode project symlinks automatically
 print_status "Updating Safari Xcode project symlinks..."
-SAFARI_XCODE_DIR="Safari-App/IMDBuddy-Safari/IMDBuddy-Safari Extension"
+SAFARI_XCODE_DIR="platforms/safari/IMDBuddy-Safari/IMDBuddy-Safari Extension"
 
 if [ -d "$SAFARI_XCODE_DIR" ]; then
     cd "$SAFARI_XCODE_DIR"
-    
+
     # Remove old symlinks (but preserve native files)
     rm -f *.html *.css 2>/dev/null || true
     rm -rf core images 2>/dev/null || true
-    
+
     # Create new symlinks that automatically include any new JS files in core
-    ln -sf ../../../dist/safari-extension/core core
-    ln -sf ../../../dist/safari-extension/popup.html popup.html  
-    ln -sf ../../../dist/safari-extension/popup.js popup.js
-    ln -sf ../../../dist/safari-extension/styles.css styles.css
-    ln -sf ../../../dist/safari-extension/images images
-    
+    ln -sf ../../../../dist/safari-extension/core core
+    ln -sf ../../../../dist/safari-extension/popup.html popup.html
+    ln -sf ../../../../dist/safari-extension/popup.js popup.js
+    ln -sf ../../../../dist/safari-extension/styles.css styles.css
+    ln -sf ../../../../dist/safari-extension/images images
+
     cd - > /dev/null
     print_success "Safari Xcode project symlinks updated - any new core/*.js files will be automatically included"
 else
@@ -143,7 +143,7 @@ else
     exit 1
 fi
 
-# Check Safari extension  
+# Check Safari extension
 if [ -f "$SAFARI_DIR/manifest.json" ] && [ -f "$SAFARI_DIR/core/init.js" ] && [ -f "$SAFARI_DIR/styles.css" ] && [ -d "$SAFARI_DIR/core" ]; then
     print_success "Safari extension verification passed"
 else
@@ -164,5 +164,5 @@ echo "   Safari: Use $SAFARI_DIR/ files in your Xcode Safari Web Extension proje
 echo ""
 echo "📚 For detailed instructions, see:"
 echo "   - README.md (Chrome setup)"
-echo "   - Safari-App/README.md (Safari setup)"
+echo "   - platforms/safari/README.md (Safari setup)"
 echo "   - HOW-TO-ADD-STREAMING-SERVICE.md (Adding new platforms)"
