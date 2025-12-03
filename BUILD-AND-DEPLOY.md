@@ -12,9 +12,39 @@ This guide provides comprehensive instructions for building, installing, and ext
 5. **Visit any supported streaming platform** and see IMDB ratings appear!
 
 ### Safari Extension
-1. **Build for Safari**: Run `./scripts/build.sh`
-2. **Follow the detailed setup guide** in `platforms/safari/README.md`
-3. **Open Safari** and enable the extension in preferences
+
+Safari extensions require a native macOS app wrapper and must be built using Xcode. This project is set up to automatically link the built extension files to the Xcode project.
+
+**Prerequisites:**
+- macOS 10.14 or later
+- Xcode 11 or later
+- An Apple Developer Account may be required for certain features.
+
+**Setup Steps:**
+
+1.  **Run the build script first:** Before opening Xcode, always run the main build script to generate the latest extension files.
+    ```bash
+    ./scripts/build.sh
+    ```
+    This creates the necessary files in `dist/safari-extension/`, which are symlinked within the Xcode project.
+
+2.  **Open the Xcode project:**
+    Navigate to `platforms/safari/` and open the `IMDBuddy-Safari.xcodeproj` project in Xcode.
+
+3.  **Configure Signing:**
+    In the project settings for both the `IMDBuddy-Safari` app and the `IMDBuddy-Safari Extension` target, select your development team to enable automatic signing.
+
+4.  **Build and Run from Xcode:**
+    Use the `Product > Run` command in Xcode (or the play button) to build and run the app.
+
+5.  **Enable the Extension in Safari:**
+    - When the app runs, it may prompt you to enable the extension.
+    - Open Safari and go to `Safari > Preferences > Extensions`.
+    - Check the box to enable the "IMDBuddy-Safari Extension".
+
+6.  **Test and Debug:**
+    - Visit a supported streaming site to see the extension in action.
+    - You can use Safari's Web Inspector to debug the content scripts and view console logs.
 
 ## Development Workflow
 
